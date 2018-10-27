@@ -18,11 +18,11 @@ else:
 	if len(hex(int(port_number))) < 6:
 		hex_port_number = str(hex(int(port_number)))
 		hex_port_number = '0' + hex_port_number[2:]
-		new_port_number = '\\0x' + hex_port_number[2:] + '\\0x' + hex_port_number[:2]
+		new_port_number = '\\x' + hex_port_number[2:] + '\\x' + hex_port_number[:2]
 
 	else:
 		hex_port_number = str(hex(int(port_number)))[2:]
-		new_port_number = '\\0x' + hex_port_number[2:] + '\\0x' + hex_port_number[:2]
+		new_port_number = '\\x' + hex_port_number[2:] + '\\x' + hex_port_number[:2]
 
 
 	# Check if there are zeros
