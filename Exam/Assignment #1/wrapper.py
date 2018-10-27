@@ -4,7 +4,6 @@ import os
 import sys
 
 port_number = str(sys.argv[1])
-hex_port_number_reverse = ''
 
 # Check if port number is above 1024 and below 65535
 
